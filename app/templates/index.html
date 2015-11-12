@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> SMT </title>
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/index.css" rel="stylesheet">
+</head>
+<body>
+<div class='container'>
+	<div class='starter-template'>
+		<h1> Hi </h1>
+		<h2> Please , Select to either design a SMT System or Use an existing one of yours </h2>
+	</div>
+	<div class='row'>
+
+		<div class='col-md-6'>
+			<h3> Use Existing System </h3></br>
+			<form method="post" action="{{url_for('data')}}">
+				<div class='form-group'>
+				<label for='pt'>Phrase Table</label>
+				<input type="text" name="pt" id='pt' class='form-control'/> 
+				</div>
+				<div class='form-group'>
+					<label for='lm'>Language Model</label>
+				<input type="text" name="lm" id='lm' class='form-control'/>
+			</div>
+				<button type="submit" class='btn btn-primary'>SUBMIT </button>
+			
+			</form>
+		</div>
+		
+		<div class='col-md-6'>
+			<h3> Design new System </h3></br>
+			<form method="post" action="{{url_for('design')}}">
+				<div class='form-group'>
+					<label for='lang1'>Language 1 Corpus  </label>
+				<input type="text" name="lang1" id='lang1' class='form-control'/> </br>
+				<label for='lang2'>Language 2 Corpus  </label>
+				<input type="text" name="lang2" id = 'lang2' class='form-control'/> 
+			</div>
+				<div class='form-group'>
+					<label for='lm_in'>Language Model Corpus  </label>
+				<input type="text" name="lm_in" id='lm_in' class='form-control'/> </br>
+			</div>
+				<div class='form-group'>
+					<label for='pt_out'>Phrase Table Output File  </label>
+				<input type="text" name="pt_out" id='pt_out' class='form-control'/> </br>
+				<label for='lm_out'>Language Model Output File  </label>
+				<input type="text" name="lm_out" id='lm_out' class='form-control'/> </br>
+			</div>
+				<button type="submit" class='btn btn-default'>SUBMIT </button>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+body {
+  padding-top: 0px;
+}
+.starter-template {
+  padding: 0px 0px;
+  text-align: center;
+  background-color: @gray-lighter
+}
+.result {
+	background-color: #EEEEEE
+}

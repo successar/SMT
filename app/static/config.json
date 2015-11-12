@@ -1,0 +1,17 @@
+{
+  "vars": {},
+  "css": [
+    "print.less",
+    "type.less",
+    "code.less",
+    "grid.less",
+    "tables.less",
+    "forms.less",
+    "buttons.less",
+    "responsive-utilities.less"
+  ],
+  "js": [
+    "affix.js"
+  ],
+  "customizerUrl": "http://getbootstrap.com/customize/?id=e04b6d2d07d299668b8e"
+}
