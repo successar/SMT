@@ -12,18 +12,27 @@
 	<div class='starter-template'>
 		<h1> Translate </h1>
 	</div>
-
+	<div class='row'>
+		<div class='col-md-6' style="margin-right : 5px;">
+			<h3> Enter Text </h3></br>
 	<form method="post" action="{{url_for('translate')}}">
 		<div class = 'form-group'>
 			<label for='sent'> Enter text to translate </label> </br>
-			<input type="text" name="sent" class='form-control'/> </br>
+			<textarea name="sent" class='form-control'>  </textarea></br>
 		</div>
 		<button type="submit" class='btn btn-default'> Submit </button>
 	</form>
-</br></br></br>
+</div>
+<div class='col-md-8'>
 	<h3> Result </h3>
 </br>
-	<h4> {{result}} </h4>
+	<h4 class='result'> {{result}} </h4>
+
+</br>
+</br>
+</br>
+<a href="{{url_for('home')}}" class='btn btn-success'> Go to Home </a>
+</div> </div>
 </div>
 </body>
 </html>

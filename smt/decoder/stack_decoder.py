@@ -45,7 +45,7 @@ class StackDecoder(object):
     """
     Phrase-based stack decoder for machine translation
     """
-    def __init__(self, phrase_table, language_model):
+    def __init__(self, phrase_table, language_model, word_penalty=0.0, beam_threshold=0.0, stack_size=100, distortion_factor=0.5):
         """
         :param phrase_table: Table of translations for source language
             phrases and the log probabilities for those translations.
@@ -62,7 +62,7 @@ class StackDecoder(object):
         self.phrase_table = phrase_table
         self.language_model = language_model
 
-        self.word_penalty = 0.0
+        self.word_penalty = word_penalty
         """
         float: Influences the translation length exponentially.
             If positive, shorter translations are preferred.
@@ -70,21 +70,21 @@ class StackDecoder(object):
             If zero, no penalty is applied.
         """
 
-        self.beam_threshold = 0.0
+        self.beam_threshold = beam_threshold
         """
         float: Hypotheses that score below this factor of the best
             hypothesis in a stack are dropped from consideration.
             Value between 0.0 and 1.0.
         """
 
-        self.stack_size = 100
+        self.stack_size = stack_size
         """
         int: Maximum number of hypotheses to consider in a stack.
             Higher values increase the likelihood of a good translation,
             but increases processing time.
         """
 
-        self.__distortion_factor = 0.5
+        self.__distortion_factor = distortion_factor
         self.__compute_log_distortion()
 
     @property

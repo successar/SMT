@@ -7,5 +7,7 @@ body {
   background-color: @gray-lighter
 }
 .result {
-	background-color: #EEEEEE
+	padding : 20px 20px;
+	background-color: #CCEECC;
+	border-radius : 15px
 }

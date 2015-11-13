@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 # coding:utf-8
 
 from __future__ import division, print_function
@@ -81,11 +80,7 @@ def train(sentences, loop_count=1000):
 
 
 def viterbi_alignment(es, fs, t, a):
-    '''
-    return
-        dictionary
-            e in es -> f in fs
-    '''
+    '''   return  dictionary  e in es -> f in fs  '''
     max_a = collections.defaultdict(float)
     l_e = len(es)
     l_f = len(fs)

@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template, request
+from flask import Flask, session, render_template, request, redirect, url_for
 from Translate import SMTReq, SMTDes
 
 class MyServer(Flask):
@@ -7,12 +7,15 @@ class MyServer(Flask):
             super(MyServer, self).__init__(*args, **kwargs)
             self.sid = 0
             self.data_obj = {}
-            self.design_obj = {}
 
 app = MyServer(__name__)
 
 @app.route('/')
 def index() :
+	return redirect(url_for('home'))
+
+@app.route('/home')
+def home() :
 	session['sid'] = app.sid
 	app.sid += 1
 	print('New session with id : ', session['sid'])
@@ -23,18 +26,18 @@ def design() :
 	lang1 = request.form['lang1']
 	lang2 = request.form['lang2']
 	lm_in = request.form['lm_in']
-	pt_out = request.form['pt_out']
-	lm_out = request.form['lm_out']
-	app.design_obj[session['sid']] = SMTDes(lang1, lang2, lm_in, pt_out, lm_out)
-	app.data_obj[session['sid']] = SMTReq(pt_out, lm_out)
-	return render_template('translate.html', result='') 
+	out = request.form['outputs']
+	SMTDes(lang1, lang2, lm_in, out)
+	return redirect(url_for('home'))
 
 
 @app.route('/data/', methods=['POST'])
 def data() :
 	pt = request.form['pt']
 	lm = request.form['lm']
-	app.data_obj[session['sid']] = SMTReq(pt, lm)
+	word_pen, beam_thresh, stack_size, distortion = request.form['word_pen'], request.form['beam_thresh'], request.form['stack_size'], request.form['distortion']
+	print(word_pen, beam_thresh, stack_size, distortion)
+	app.data_obj[session['sid']] = SMTReq(pt, lm, float(word_pen), float(beam_thresh), float(stack_size), float(distortion))
 	return render_template('translate.html', result='')
 
 @app.route('/translate/', methods=['POST'])
