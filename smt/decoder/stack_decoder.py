@@ -142,6 +142,7 @@ class StackDecoder(object):
                         new_hypothesis.future_score = self.future_score( new_hypothesis, future_score_table, sentence_length )
                         
                         total_words = new_hypothesis.total_translated_words()                        
+                        new_hypothesis.print_hypo()
                         stacks[total_words].push(new_hypothesis)
 
         if not stacks[sentence_length]:
@@ -243,8 +244,6 @@ class StackDecoder(object):
         """
         score = hypothesis.raw_score
         score += translation_option.log_prob
-        # The API of language_model is subject to change; it could accept
-        # a string, a list of words, and/or some other type
         score += self.language_model.probability_change(
             hypothesis, translation_option.trg_phrase)
         score += self.distortion_score(hypothesis, src_phrase_span)
@@ -400,6 +399,9 @@ class _Hypothesis(object):
             return
         self.__build_translation(hypothesis.previous, output)
         output.extend(hypothesis.trg_phrase)
+
+    def print_hypo(self):
+        print("{}, {}, {}, {}".format(self.raw_score, self.src_phrase_span, self.trg_phrase, self.future_score))
 
 
 class _Stack(object):

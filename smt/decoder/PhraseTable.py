@@ -43,6 +43,7 @@ class PhraseTable(object):
         self.src_phrases[src_phrase].append(entry)
         self.src_phrases[src_phrase].sort(key=lambda e: e.log_prob,
                                           reverse=True)
+        self.src_phrases[src_phrase] = self.src_phrases[src_phrase][:4]
 
     def __contains__(self, src_phrase):
         return src_phrase in self.src_phrases

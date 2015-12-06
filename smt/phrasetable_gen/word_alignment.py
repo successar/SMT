@@ -2,7 +2,6 @@
 # coding:utf-8
 
 from __future__ import division, print_function
-from smt.ibmmodel import ibmmodel2
 from pprint import pprint
 
 
@@ -83,20 +82,6 @@ def alignment(es, fs, e2f, f2e):
     _e2f = zip(*reversed(zip(*e2f)))
     return _alignment(es, fs, _e2f, f2e)
 
-
-def symmetrization(es, fs, corpus):
-    '''
-    corpus for translation from fs to es
-    return alignment **from fs to es**
-    '''
-    f2e_train = ibmmodel2._train(corpus, loop_count=1000)
-    f2e = ibmmodel2.viterbi_alignment(es, fs, *f2e_train).items()
-
-    e2f_corpus = zip(*reversed(zip(*corpus)))
-    e2f_train = ibmmodel2._train(e2f_corpus, loop_count=1000)
-    e2f = ibmmodel2.viterbi_alignment(fs, es, *e2f_train).items()
-
-    return alignment(es, fs, e2f, f2e)
 
 
 if __name__ == '__main__':

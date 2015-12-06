@@ -15,7 +15,6 @@ def phrase_extract(es, fs, alignment):
 
 
 def extract(es, fs, alignment):
-    """ warning : alignment starts from 1 - not 0 """
     phrases = set()
     len_es = len(es)
     for e_start in range(1, len_es+1):

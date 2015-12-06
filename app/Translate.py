@@ -1,13 +1,12 @@
 from __future__ import division, print_function
 from smt.decoder.PhraseTable import PhraseTable
 from smt.decoder.stack_decoder import StackDecoder
-from smt.ibmmodel import ibmmodel2
-from smt.phrase import phrase_extract
-from smt.phrase.word_alignment import alignment
+from smt.phrasetable_gen import ibmmodel2, phrase_extract
+from smt.phrasetable_gen.word_alignment import alignment
 from utility import mkcorpus
 from collections import defaultdict
 import collections
-from smt.langmodel.ngram import ngram
+from smt.langmodel.ngram import ngram, create_ngram_count, create_unigram_count
 import math
 import cPickle as pickle
 
@@ -118,35 +117,10 @@ class SMTDes:
             p1_2 = math.log(count / count1_2)
             fp.write((lang1p + '|||' + lang2p + '|||' + str(p1_2) + '\n').encode('utf-8'))
 
-    def create_ngram_count(self, corpus, n=3):
-        ngram_dic = collections.defaultdict(float)
-        ngram_dic_WL = collections.defaultdict(float)
-        for item in corpus:
-            sentences = item.split()
-            sentences = ["</s>", "<s>"] + sentences + ["</s>"]
-            ngrams = ngram(sentences, n)
-            for tpl in ngrams:
-                ngram_dic[tpl] += 1
-                ngram_dic_WL[tpl[:-1]] += 1
-
-        return ngram_dic, ngram_dic_WL
-
-    def create_unigram_count(self, corpus):
-        ngram_dic = collections.defaultdict(float)
-        for item in corpus:
-            sentences = item.split()
-            if len(sentences) < 1 :
-                continue
-            ngrams = ngram(sentences, 1)
-            for tpl in ngrams:
-                ngram_dic[tpl] += 1
-
-        return ngram_dic
-
 
     def create_ngram_prob(self, corpus, lm_file):
         # calculate total number
-        ngram_count, ngram_countWL = self.create_ngram_count(corpus, 3)
+        ngram_count, ngram_countWL = create_ngram_count(corpus, 3)
         bigram_done = defaultdict(int)
         totalnumber = len(ngram_count.keys())
 
@@ -174,7 +148,7 @@ class SMTDes:
 
 
     def create_unigram_prob(self, corpus, lm_file):
-        unigram_count = self.create_unigram_count(corpus)
+        unigram_count = create_unigram_count(corpus)
         sm = sum(unigram_count.values())
         totalnumber = len(unigram_count.keys())
 

@@ -15,7 +15,7 @@
 	</div>
 	<div class='row'>
 
-		<div class='col-md-6'>
+		<div class='col-md-6' style='background : #EEFFEE; border-radius : 10px;'>
 			<h3> Use Existing System </h3></br>
 			<form method="post" action="{{url_for('data')}}">
 				<div class='form-group'>
@@ -29,21 +29,21 @@
 			<div class='form-group'>
 				<div class='controls form-inline'>
 				<label for='word_pen'> Word Penalty : <span id='wpt'> </span> </label>
-				<input type='range' min='-1.0' max='1.0' step='0.01' name='word_pen' id='word_pen' onchange='document.getElementById("wpt").innerHTML=this.value;'/>
+				<input type='range' min='-1.0' max='1.0' step='0.01' value='0.0' name='word_pen' id='word_pen' onchange='document.getElementById("wpt").innerHTML=this.value;'/>
 			</div>
 				<label for='beam_thresh'> Beam Threshold : <span id='btt'> </span> </label>
-				<input type='range' min='0.0' max='1.0' step='0.01' name='beam_thresh' id='beam_thresh' onchange='document.getElementById("btt").innerHTML=this.value;'/>
+				<input type='range' min='0.0' max='1.0' step='0.01' name='beam_thresh' value='0.0' id='beam_thresh' onchange='document.getElementById("btt").innerHTML=this.value;'/>
 				<label for='stack_size'> Stack Size : <span id='sst'> </span> </label>
-				<input type='range' min='10' max='200' step='20' name='stack_size' id='stack_size' onchange='document.getElementById("sst").innerHTML=this.value;'/>
+				<input type='range' min='10' max='200' step='20' name='stack_size' value='100' id='stack_size' onchange='document.getElementById("sst").innerHTML=this.value;'/>
 				<label for='distortion'> Distortion Factor : <span id='dft'> </span> </label>
-				<input type='range' min='0.0' max='1.0' step='0.01' name='distortion' id='distortion' onchange='document.getElementById("dft").innerHTML=this.value;'/>
+				<input type='range' min='0.0' max='1.0' step='0.01' name='distortion' value='0.5' id='distortion' onchange='document.getElementById("dft").innerHTML=this.value;'/>
 			</div>
-				<button type="submit" class='btn btn-primary'>SUBMIT </button>
+				<button type="submit" class='btn btn-success'>SUBMIT </button>
 			
 			</form>
 		</div>
 		
-		<div class='col-md-6'>
+		<div class='col-md-6' style='background : #EEEEFF; border-radius : 10px;'>
 			<h3> Design new System </h3></br>
 			<form method="post" action="{{url_for('design')}}">
 				<div class='form-group'>
@@ -60,7 +60,7 @@
 					<label for='outputs'>Where to Store your Output Files (.pt, .lm, .align)  </label>
 				<input type="text" name="outputs" id='outputs' class='form-control'/> </br>
 			</div>
-				<button type="submit" class='btn btn-default'>SUBMIT </button>
+				<button type="submit" class='btn btn-primary'>SUBMIT </button>
 			</form>
 		</div>
 	</div>

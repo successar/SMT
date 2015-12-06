@@ -5,11 +5,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="smt",
-    version="0.1",
+    version="1.0",
     description="Statistical Machine Translation implementation by Python",
-    author="Noriyuki Abe",
-    author_email="kenko.py@gmail.com",
-    url="http://kenkov.jp",
+    author="Sarthak Jain",
+    author_email="successar@gmail.com",
     packages=find_packages(),
-    test_suite="test",
 )
